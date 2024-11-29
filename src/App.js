@@ -29,24 +29,26 @@ export default function App() {
 
 function Accordition({data})
 {
-  const [isOpen, setisOpen] = useState(false);
+  const [CurOpen, setisOpen] = useState(null);
+
   return (
    <div className='accordion'> 
     {
     data.map(
       (el, i) => 
-      <AccorditionItem title={el.title} text={el.text} num={i} key={el.title}/>
+      <AccorditionItem CurOpen={CurOpen} OnOpen={setisOpen} on title={el.title} text={el.text} num={i} key={el.title}/>
      )}
    </div>
   );
 }
 
-function AccorditionItem({num, title, text})
+function AccorditionItem({num, title, text, CurOpen, OnOpen})
 {
-  const [isOpen, setisOpen] = useState(false);
-
+  //const [isOpen, setisOpen] = useState(false);
+  const isOpen = num === CurOpen;
+  
   function handleToggle() {
-    setisOpen((isOpen) => !isOpen);
+   OnOpen(num); 
   }
 
   return (
